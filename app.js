@@ -20,6 +20,7 @@ for(let page = 0x0000; page < 0xFFFF; page++){
 }
 
 console.log(parsedFile);
+fs.writeFileSync('./output.json', JSON.stringify(parsedFile));
 
 //Used to decode BCD encoded timestamp
 function unbcd(bcd) {
@@ -50,7 +51,7 @@ function parseSensorData(pageData){
 
     let sensorData = {};
 
-    sensorData.timestamp = new Date(Date.UTC(2000 + unbcd(pageData[0x02]), unbcd(pageData[0x03]), unbcd(pageData[0x04]), unbcd(pageData[0x05]), unbcd(pageData[0x06]), unbcd(pageData[0x07])));
+    sensorData.timestamp = new Date(Date.UTC(2000 + unbcd(pageData[0x02]), unbcd(pageData[0x03]) - 1, unbcd(pageData[0x04]), unbcd(pageData[0x05]), unbcd(pageData[0x06]), unbcd(pageData[0x07])));
     sensorData.counter_a = pageData.readUInt16LE(0x10);
     sensorData.counter_b = pageData.readUInt16LE(0x13);
     sensorData.status = pageData[0x12];
