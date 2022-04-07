@@ -71,7 +71,7 @@ function parseStatusInfo(pageData){
 function parseDeviceInfo(pageData){
     let deviceInfo = {};
 
-    deviceInfo.node_id = pageData.toString('hex',0x05,0x0A);
+    deviceInfo.node_id = pageData.toString('hex',0x05,0x0B);
 
     parsedFile.deviceInfo = deviceInfo;
 }
